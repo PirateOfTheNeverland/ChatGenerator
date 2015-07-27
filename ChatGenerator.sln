@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatGenerator", "ChatGenerator\ChatGenerator.csproj", "{97AE739A-5DE7-4830-A249-E29A9E87FCBB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{439C0734-B27A-4390-A8A6-4DDE8E49B8C6}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatVolumizer", "ChatVolumizer\ChatVolumizer.csproj", "{C72E7FDF-2E80-46F5-B3B3-3E04FA75E3EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{97AE739A-5DE7-4830-A249-E29A9E87FCBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97AE739A-5DE7-4830-A249-E29A9E87FCBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97AE739A-5DE7-4830-A249-E29A9E87FCBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97AE739A-5DE7-4830-A249-E29A9E87FCBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C72E7FDF-2E80-46F5-B3B3-3E04FA75E3EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C72E7FDF-2E80-46F5-B3B3-3E04FA75E3EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C72E7FDF-2E80-46F5-B3B3-3E04FA75E3EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C72E7FDF-2E80-46F5-B3B3-3E04FA75E3EF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
