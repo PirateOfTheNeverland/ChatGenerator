@@ -28,7 +28,7 @@ namespace ChatGenerator
         {
             ChromeOptions options = new ChromeOptions();
             options.AddArguments("--incognito");
-            options.AddArguments("--start-maximized");
+            options.AddArguments("--start-minimized");
             driver = new ChromeDriver(options);
             baseUrl = "http://pofig.livetex.ru/";
         }
@@ -60,10 +60,22 @@ namespace ChatGenerator
         }
 
         //[TestCase("103744", "TestText", "World", "Hello, this is my message!!!")]
-        public void GenerateClientChat(string stableSiteId, string widgetTitle, string clientName, string msg, string volumedMsg, int volumizingCount)
+        public void GenerateClientChat(string stableSiteId, // Site ID
+            string widgetTitle, // The title of LiveTex widget on site with SiteID
+            string userName, // Name of user starting chat with operator
+            string msg, // First message that will be sent to operator
+            string volumedMsg, // Text of volumizing message
+            int volumizingCount, // NUmber of volumizing messages
+            StringBuilder sb, // Log (used for logging thread activity)
+            string threadName // Thread name
+            )
+
         {
+            DateTime start = DateTime.Now;            
             try
             {
+                sb.AppendLine(">>>>> Thread \"" + threadName + "\" preparation started: " 
+                    + start.ToString("yyyy-MM-ddTHH:mm:ss.fff"));
                 #region Prepare
                 Console.WriteLine(TestBase.msgTestPreparationStart);
                 //SetupTestChatGenerator();
@@ -76,30 +88,57 @@ namespace ChatGenerator
                 Console.WriteLine(TestBase.msgTestPreparationEnd);
                 #endregion
 
-
+                sb.AppendLine("----- SetStableSiteId(...)");
                 SetStableSiteId(stableSiteId);
+
+                sb.AppendLine("----- DeleteCookie()");
                 DeleteCookie();
+
+                sb.AppendLine("----- ReloadPage()");
                 ReloadPage();
+
+                sb.AppendLine("----- OpenStableSite()");
                 OpenStableSite();
-                //System.Threading.Thread.Sleep(5000);
+                
+                sb.AppendLine("----- WaitForChatWindow(...)");
                 WaitForChatWindow(widgetTitle, 30);
-                //System.Threading.Thread.Sleep(5000);
+                
+                sb.AppendLine("----- OpenOnlineChatWindow()");
                 OpenOnlineChatWindow();
-                //System.Threading.Thread.Sleep(5000);
-                EnterNameIntoOnlineChatWindow(clientName);
+                
+                sb.AppendLine("----- EnterNameIntoOnlineChatWindow()");
+                EnterNameIntoOnlineChatWindow(userName);
 
+                sb.AppendLine("----- SendFirstMessageIntoOnlineChatWindow()");
                 SendFirstMessageIntoOnlineChatWindow(msg);
-                System.Threading.Thread.Sleep(3000);
 
+                sb.AppendLine("----- Sleep(2000)");
+                System.Threading.Thread.Sleep(2000);
+
+                DateTime sending = DateTime.Now;
+                sb.AppendLine("----- Start volumizing thread \"" + threadName + ". Time spent after start: " 
+                    + (new TimeSpan(sending.Ticks - start.Ticks)).TotalMilliseconds.ToString());
                 for (int i = 0; i < volumizingCount; i++)
                 {
                     SendNextMessageIntoOnlineChatWindow(i.ToString() + "___" + volumedMsg);
-                    System.Threading.Thread.Sleep(3000);
+                    System.Threading.Thread.Sleep(1000);
                 }
+                DateTime fin = DateTime.Now;
+                sb.AppendLine("<<<<< Thread \"" + threadName + "\" finished: " + fin.ToString("yyyy-MM-ddTHH:mm:ss.fff") + "\r\n");
+                sb.AppendLine("----- Thread \"" + threadName + "\" setup time: "
+                    + (new TimeSpan(sending.Ticks - start.Ticks)).TotalMilliseconds.ToString());
+                sb.AppendLine("----- Thread \"" + threadName + "\" volumizing time: " 
+                    + (new TimeSpan(fin.Ticks - sending.Ticks)).TotalMilliseconds.ToString());
+                sb.AppendLine("----- Thread \"" + threadName + "\" total work time: " 
+                    + (new TimeSpan(fin.Ticks - start.Ticks)).TotalMilliseconds.ToString() + "\r\n\r\n");
             }
             catch (Exception ex)
             {
-                //throw ex;
+                DateTime fin = DateTime.Now;
+                sb.AppendLine("ERROR: " + ex.Message);
+                sb.AppendLine("<<<<< Thread \"" + threadName + " finished: " + fin.ToString("yyyy-MM-ddTHH:mm:ss.fff"));
+                sb.AppendLine("<<<<< Thread \"" + threadName + " work time: " 
+                    + (new TimeSpan(fin.Ticks - start.Ticks)).TotalMilliseconds.ToString());
             }
         }
         

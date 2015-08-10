@@ -14,5 +14,6 @@ C:\GitHub\Livetex-QA\ChatGenerator\ChatGenerator\bin\Debug\Selenium.WebDriverBac
 C:\GitHub\Livetex-QA\ChatGenerator\ChatGenerator\bin\Debug\ThoughtWorks.Selenium.Core.xml
 C:\GitHub\Livetex-QA\ChatGenerator\ChatGenerator\bin\Debug\WebDriver.xml
 C:\GitHub\Livetex-QA\ChatGenerator\ChatGenerator\bin\Debug\WebDriver.Support.xml
+C:\GitHub\Livetex-QA\ChatGenerator\ChatGenerator\obj\Debug\ChatGenerator.csprojResolveAssemblyReference.cache
 C:\GitHub\Livetex-QA\ChatGenerator\ChatGenerator\obj\Debug\ChatGenerator.dll
 C:\GitHub\Livetex-QA\ChatGenerator\ChatGenerator\obj\Debug\ChatGenerator.pdb

@@ -1,0 +1,3 @@
+----- Applying common settings.
+EXCEPTION: Site ID value is incorrect.
+
